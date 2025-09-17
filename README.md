@@ -25,7 +25,7 @@ conda env create -f environment.yaml
 conda activate syssec
 ```
 
-Then install Chipwhisperer according to the documentation for your OS [here](https://chipwhisperer.readthedocs.io/en/latest/index.html#overview) while in your conda environment.
+Then install Chipwhisperer according to the documentation for your OS [here](https://chipwhisperer.readthedocs.io/en/latest/installation.html) while in your conda environment.
 
 ## Chipwhisperer Links
 - [chipwhisperer github](https://github.com/newaetech/chipwhisperer)
@@ -34,6 +34,7 @@ Then install Chipwhisperer according to the documentation for your OS [here](htt
 
 ## Requirements
 - USB-A Port for connecting hardware
+- Your laptop + github should be set-up with an SSH key. See a tutorial [here](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) and [here](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account).
 
 # Labs
 - Setting up: [setup-lab.ipynb](./labs/01-setup-lab.ipynb)
