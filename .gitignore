@@ -56,8 +56,14 @@ dkms.conf
 *.eep
 *.lss
 *.sym
+*.hex
+objdir-CWNANO/
+.dep/
 
 # jupyter notebook files
 .ipynb_checkpoints/
 
 .DS_Store
+
+*SOLUTION.c
+*SOLUTION.ipynb
