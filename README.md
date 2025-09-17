@@ -25,7 +25,7 @@ conda env create -f environment.yaml
 conda activate syssec
 ```
 
-Then install Chipwhisperer according to the documentation for your OS [here](https://chipwhisperer.readthedocs.io/en/latest/index.html#overview), while in your conda environment!
+Then install Chipwhisperer according to the documentation for your OS [here](https://chipwhisperer.readthedocs.io/en/latest/index.html#overview) while in your conda environment.
 
 ## Chipwhisperer Links
 - [chipwhisperer github](https://github.com/newaetech/chipwhisperer)
