@@ -67,3 +67,4 @@ objdir-CWNANO/
 
 *SOLUTION.c
 *SOLUTION.ipynb
+__pycache__/
