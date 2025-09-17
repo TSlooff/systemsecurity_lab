@@ -1,0 +1,19 @@
+name: syssec
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.13
+  - colorama
+  - configobj
+  - libusb
+  - numpy
+  - pyserial
+  - tqdm
+  - cython
+  - ecpy
+  - jupyter
+  - matplotlib
+  - nbstripout
+  - make
+prefix: /opt/homebrew/Caskroom/miniconda/base/envs/syssec

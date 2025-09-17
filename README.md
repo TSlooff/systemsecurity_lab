@@ -17,6 +17,16 @@ cd systemsecurity_lab
 git submodule update --init --recursive
 ```
 
+# Installation
+
+To work with the labs you have to install required packages, including the chipwhisperer package. The easiest way to get started is to first use anaconda with the provided `environment.yaml` file [as such](https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html#creating-an-environment-from-an-environment-yml-file):
+```
+conda env create -f environment.yaml
+conda activate syssec
+```
+
+Then install Chipwhisperer according to the documentation for your OS [here](https://chipwhisperer.readthedocs.io/en/latest/index.html#overview), while in your conda environment!
+
 ## Chipwhisperer Links
 - [chipwhisperer github](https://github.com/newaetech/chipwhisperer)
 - [CW API for controlling + communicating hardware](https://chipwhisperer.readthedocs.io/en/latest/index.html#api)
@@ -24,7 +34,6 @@ git submodule update --init --recursive
 
 ## Requirements
 - USB-A Port for connecting hardware
-- Follow installation instructions for your OS [here](https://chipwhisperer.readthedocs.io/en/latest/index.html#overview)
 
 # Labs
 - Setting up: [setup-lab.ipynb](./labs/01-setup-lab.ipynb)
