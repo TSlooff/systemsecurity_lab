@@ -3,7 +3,11 @@
 #include <string.h>
 
 static uint16_t toyclock;
+
+// BEGIN TODO UPDATE
 static uint8_t mask;
+// END TODO
+
 static uint32_t seed;
 
 uint16_t my_rand(void) {
@@ -67,11 +71,13 @@ void poll_sensor(SensorData *data) {
     data->noise = sample_gaussian(6000, 1500);
 }
 
+// BEGIN TODO UPDATE
 void encrypt(uint8_t *data, uint8_t data_len) {
     for (uint8_t i = 0; i < data_len; i++) {
         data[i] ^= mask;
     }
 }
+// END TODO
 
 void send_sensor_data(SensorData *data, uint8_t encrypt_data) {
     uint8_t bytes[sizeof(SensorData)];
@@ -108,7 +114,9 @@ int main(void)
 	simpleserial_init();
     
     seed = 42;
+    // BEGIN TODO UPDATE
     mask = (my_rand() >> 8) & 0xff;
+    // END TODO
     toyclock = my_rand();
 
     // at most 252 bytes of data can be received in a single command
