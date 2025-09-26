@@ -4,15 +4,23 @@ import time
 
 FIXED_POINT_PRECISION = 100
 fields = {
-    'device_id':       ('H',  0,  2,    0, 1),
-    'temperature':     ('h',  2,  4,    0, FIXED_POINT_PRECISION),
-    'humidity':        ('H',  4,  6,    0, FIXED_POINT_PRECISION),
-    'pressure':        ('H',  6,  8, 1000, FIXED_POINT_PRECISION),
-    'wind_speed':      ('H',  8, 10,    0, FIXED_POINT_PRECISION),
-    'wind_direction':  ('H', 10, 12,    0, FIXED_POINT_PRECISION),
-    'noise':           ('H', 12, 14,    0, FIXED_POINT_PRECISION),
-    'timestamp':       ('H', 14, 16,    0, 1)
+    'device_id':       ('<H',  0,  2,    0, 1),
+    'temperature':     ('<h',  2,  4,    0, FIXED_POINT_PRECISION),
+    'humidity':        ('<H',  4,  6,    0, FIXED_POINT_PRECISION),
+    'pressure':        ('<H',  6,  8, 1000, FIXED_POINT_PRECISION),
+    'wind_speed':      ('<H',  8, 10,    0, FIXED_POINT_PRECISION),
+    'wind_direction':  ('<H', 10, 12,    0, FIXED_POINT_PRECISION),
+    'noise':           ('<H', 12, 14,    0, FIXED_POINT_PRECISION),
+    'timestamp':       ('<H', 14, 16,    0, 1)
 }
+
+# These are the averages when looking at the fixed-point representation of the first 500 samples after a reset
+field_averages = {'temperature': np.float64(1494.972),
+ 'humidity': np.float64(7041.496),
+ 'pressure': np.float64(1283.548),
+ 'wind_speed': np.float64(611.458),
+ 'wind_direction': np.float64(22007.58),
+ 'noise': np.float64(6045.446)}
 
 def get_field(field:str, bytes_data:np.ndarray, FXP_REPR: bool):
     """
