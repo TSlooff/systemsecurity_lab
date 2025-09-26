@@ -49,14 +49,14 @@ def parse_sensor_data(bytes_data: bytes, print_data: bool):
     """
     assert(len(bytes_data) == 16)
     
-    device_id = struct.unpack('H', bytes_data[0:2])[0]
-    temperature = struct.unpack('h', bytes_data[2:4])[0] / FIXED_POINT_PRECISION
-    humidity = struct.unpack('H', bytes_data[4:6])[0] / FIXED_POINT_PRECISION
-    pressure = 1000 + struct.unpack('H', bytes_data[6:8])[0] / FIXED_POINT_PRECISION
-    wind_speed = struct.unpack('H', bytes_data[8:10])[0] / FIXED_POINT_PRECISION
-    wind_direction = struct.unpack('H', bytes_data[10:12])[0] / FIXED_POINT_PRECISION
-    noise = struct.unpack('H', bytes_data[12:14])[0] / FIXED_POINT_PRECISION
-    timestamp = struct.unpack('H', bytes_data[14:16])[0]
+    device_id = fields['device_id'][3] + struct.unpack(fields['device_id'][0], bytes_data[fields['device_id'][1]:fields['device_id'][2]])[0]
+    temperature = fields['temperature'][3] + struct.unpack(fields['temperature'][0], bytes_data[fields['temperature'][1]:fields['temperature'][2]])[0] / fields['temperature'][4]
+    humidity = fields['humidity'][3] + struct.unpack(fields['humidity'][0], bytes_data[fields['humidity'][1]:fields['humidity'][2]])[0] / fields['humidity'][4]
+    pressure = fields['pressure'][3] + struct.unpack(fields['pressure'][0], bytes_data[fields['pressure'][1]:fields['pressure'][2]])[0] / fields['pressure'][4]
+    wind_speed = fields['wind_speed'][3] + struct.unpack(fields['wind_speed'][0], bytes_data[fields['wind_speed'][1]:fields['wind_speed'][2]])[0] / fields['wind_speed'][4]
+    wind_direction = fields['wind_direction'][3] + struct.unpack(fields['wind_direction'][0], bytes_data[fields['wind_direction'][1]:fields['wind_direction'][2]])[0] / fields['wind_direction'][4]
+    noise = fields['noise'][3] + struct.unpack(fields['noise'][0], bytes_data[fields['noise'][1]:fields['noise'][2]])[0] / fields['noise'][4]
+    timestamp = fields['timestamp'][3] + struct.unpack(fields['timestamp'][0], bytes_data[fields['timestamp'][1]:fields['timestamp'][2]])[0]
     if print_data:
         print(f"""Received sensor data from device {device_id} at time {timestamp}:
     Temperature: {temperature:.2f}°C
