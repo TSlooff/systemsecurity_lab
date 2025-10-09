@@ -37,4 +37,5 @@ Then install Chipwhisperer according to the documentation for your OS [here](htt
 - Your laptop + github should be set-up with an SSH key. See a tutorial [here](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) and [here](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account).
 
 # Labs
-- Setting up: [setup-lab.ipynb](./labs/01-setup-lab.ipynb)
+- Setting up: [01-setup-lab.ipynb](./labs/01-setup-lab.ipynb)
+- Cryptography: [02-cryptography.ipynb](./labs/02-cryptography.ipynb)
