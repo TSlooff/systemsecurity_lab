@@ -58,6 +58,7 @@ dkms.conf
 *.sym
 *.hex
 objdir-CWNANO/
+objdir-CWLITEARM/
 .dep/
 
 # jupyter notebook files
