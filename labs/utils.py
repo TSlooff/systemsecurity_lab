@@ -75,4 +75,24 @@ def reset_target(scope):
     time.sleep(0.05)
     scope.io.nrst = 'high_z'
     time.sleep(0.05)
-    
+
+# SCA-RELATED
+
+HW = np.array([bin(n).count("1") for n in range(0, 256)])
+
+def snr(obs_value, traces):
+    vals = np.unique(obs_value)
+    means = [None] * len(vals)
+    varss = [None] * len(vals)
+    for i, val in enumerate(vals):
+        means[i] = np.mean(traces[obs_value == val], axis=0)
+        varss[i] = np.var(traces[obs_value == val], axis=0)
+    means = np.array(means)
+    varss = np.array(varss)
+    snr = np.zeros_like(means[0])
+    u_tot = np.mean(means, axis=0)
+    v_tot = np.mean(varss, axis=0)
+    for i in range(len(means)):
+        snr += np.power(means[i]-u_tot, 2)
+    snr = snr / v_tot
+    return snr
