@@ -40,3 +40,4 @@ Then install Chipwhisperer according to the documentation for your OS [here](htt
 - Setting up: [01-setup-lab.ipynb](./labs/01-setup-lab.ipynb)
 - Cryptography: [02-cryptography.ipynb](./labs/02-cryptography.ipynb)
 - Side-Channel Attacks: [03-SCA.ipynb](./labs/03-SCA.ipynb)
+- Fault Analysis: [04-FA.ipynb](./labs/04-FA.ipynb)
