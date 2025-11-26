@@ -16,4 +16,10 @@ dependencies:
   - matplotlib
   - nbstripout
   - make
+  - holoviews
+  - optuna
+  - plotly
+  - scipy
+  - cmake
+  - c-compiler
 prefix: /opt/homebrew/Caskroom/miniconda/base/envs/syssec
