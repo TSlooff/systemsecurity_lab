@@ -75,3 +75,21 @@ def decrypt(ciphertext:int, key:int):
         state = sbox_layer_inv(state)
     state = add_round_key(state, roundkeys[0])
     return state
+
+def encrypt_faulty(plaintext:int, key:int, fault_round:int, fault_bit:int):
+    """
+    Performs PRESENT encryption but injects a fault in bit :fault_bit: before Sbox in round :fault_round:
+    """
+    assert 0 <= fault_round < 31
+    assert 0 <= fault_bit < 64
+    roundkeys = generate_round_keys(key)
+    state = plaintext
+    for i in range(31):
+        state = add_round_key(state, roundkeys[i])
+        if i == fault_round:
+            mask = 1 << (63 - fault_bit)
+            state ^= mask
+        state = sbox_layer(state)
+        state = permutation_layer(state)
+    state = add_round_key(state, roundkeys[31])
+    return state
