@@ -73,6 +73,7 @@ __pycache__/
 CMakeFiles/
 CMakeCache.txt
 cmake_install.cmake
+.vscode/
 
 # Lab 5 specifics
 labs/05-CacheSCA/victim.c
