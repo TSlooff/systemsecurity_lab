@@ -68,4 +68,13 @@ objdir-CWLITEARM/
 
 *SOLUTION.c
 *SOLUTION.ipynb
+
 __pycache__/
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+
+# Lab 5 specifics
+labs/05-CacheSCA/victim.c
+labs/05-CacheSCA/attacker.out
+labs/05-CacheSCA/Makefile
