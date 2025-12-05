@@ -22,4 +22,5 @@ dependencies:
   - scipy
   - cmake
   - c-compiler
+  - cryptography
 prefix: /opt/homebrew/Caskroom/miniconda/base/envs/syssec

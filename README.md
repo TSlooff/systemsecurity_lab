@@ -42,3 +42,4 @@ Then install Chipwhisperer according to the documentation for your OS [here](htt
 - Side-Channel Attacks: [03-SCA.ipynb](./labs/03-SCA.ipynb)
 - Fault Analysis: [04-FA.ipynb](./labs/04-FA.ipynb)
 - Cache Side-Channels: [05-CacheSCA](./labs/05-CacheSCA/README.md)
+- Trusted Execution Environments [06-TEE.ipynb](./labs/06-TEE.ipynb)
