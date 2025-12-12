@@ -23,4 +23,7 @@ dependencies:
   - cmake
   - c-compiler
   - cryptography
+  - spdx-tools
+  - networkx
+  - pydot
 prefix: /opt/homebrew/Caskroom/miniconda/base/envs/syssec
