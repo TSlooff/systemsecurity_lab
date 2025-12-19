@@ -26,4 +26,7 @@ dependencies:
   - spdx-tools
   - networkx
   - pydot
+  - pip:
+      - py-sudoku
+      - tenseal
 prefix: /opt/homebrew/Caskroom/miniconda/base/envs/syssec

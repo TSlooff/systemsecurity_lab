@@ -44,3 +44,4 @@ Then install Chipwhisperer according to the documentation for your OS [here](htt
 - Cache Side-Channels: [05-CacheSCA](./labs/05-CacheSCA/README.md)
 - Trusted Execution Environments: [06-TEE.ipynb](./labs/06-TEE.ipynb)
 - Supply Chain: [07-SupplyChain.ipynb](./labs/07-SupplyChain.ipynb)
+- Privacy-Preserving Techniques: [08-PPT.ipynb](./labs/08-PPT.ipynb)
