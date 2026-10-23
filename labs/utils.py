@@ -1,6 +1,9 @@
 import struct
 import numpy as np
 import time
+from networkx.drawing.nx_pydot import graphviz_layout
+import networkx as nx
+import matplotlib.pyplot as plt
 
 FIXED_POINT_PRECISION = 100
 fields = {
@@ -96,3 +99,41 @@ def snr(obs_value, traces):
         snr += np.power(means[i]-u_tot, 2)
     snr = snr / v_tot
     return snr
+
+# SUPPLY-CHAIN RELATED
+
+def describe(G, n):
+    """Short text label for node n."""
+    d = G.nodes[n]
+    if d['type'] == 'split':
+        return f"{next(G.predecessors(n))}[{d['bit']}]"
+    if d['type'] == 'join':
+        return f"→{next(G.successors(n))}[{d['bit']}]"
+    if d['type'] == 'DFF':
+        return f"{n}\nFF {d['stores']}"
+    if d['type'] in ('input', 'output', 'wire', 'register', 'junction', 'const'):
+        return n
+    return f"{n}\n{d['type']}"
+
+COLOR = {'input': '#9ecae1', 'output': '#fc9272', 'split': '#f0f0f0', 'join': '#f0f0f0',
+         'DFF': '#74c476', 'register': '#c7e9c0'}
+
+def draw(G, title, figsize=(14, 9)):
+    pos = graphviz_layout(G, prog='dot')
+    pos = {n: (-y, x) for n, (x, y) in pos.items()}   # left to right
+    plt.figure(figsize=figsize)
+    size = {n: 800 if G.nodes[n]['type'] == 'DFF' else 1100 for n in G}
+    for shape, nodes in [('s', [n for n in G if G.nodes[n]['type'] == 'DFF']),
+                         ('o', [n for n in G if G.nodes[n]['type'] != 'DFF'])]:
+        nx.draw_networkx_nodes(G, pos, nodelist=nodes, node_shape=shape, node_size=[size[n] for n in nodes],
+                               node_color=[COLOR.get(G.nodes[n]['type'], '#d9d9d9') for n in nodes])
+    control = [(u, v) for u, v, p in G.edges(data='in_port') if p in ('C', 'R')]
+    data = [e for e in G.edges if e not in set(control)]
+    sizes = [size[n] for n in G]
+    nx.draw_networkx_edges(G, pos, edgelist=data, node_size=sizes, arrowsize=8)
+    nx.draw_networkx_edges(G, pos, edgelist=control, node_size=sizes, arrowsize=8,
+                           style='dashed', edge_color='#bdbdbd')
+    nx.draw_networkx_labels(G, pos, labels={n: describe(G, n) for n in G}, font_size=7)
+    plt.title(title)
+    plt.axis('off')
+    plt.show()

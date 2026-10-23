@@ -1,0 +1,302 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">
+  <key id="d6" for="edge" attr.name="out_port" attr.type="string" />
+  <key id="d5" for="edge" attr.name="in_port" attr.type="string" />
+  <key id="d4" for="node" attr.name="registered" attr.type="boolean" />
+  <key id="d3" for="node" attr.name="stores" attr.type="string" />
+  <key id="d2" for="node" attr.name="variant" attr.type="string" />
+  <key id="d1" for="node" attr.name="bit" attr.type="long" />
+  <key id="d0" for="node" attr.name="type" attr.type="string" />
+  <graph edgedefault="directed">
+    <node id="x0">
+      <data key="d0">split</data>
+      <data key="d1">3</data>
+    </node>
+    <node id="c14">
+      <data key="d0">MUX</data>
+    </node>
+    <node id="x1">
+      <data key="d0">split</data>
+      <data key="d1">3</data>
+    </node>
+    <node id="x2">
+      <data key="d0">join</data>
+      <data key="d1">3</data>
+    </node>
+    <node id="x3">
+      <data key="d0">split</data>
+      <data key="d1">1</data>
+    </node>
+    <node id="c15">
+      <data key="d0">OR</data>
+    </node>
+    <node id="x4">
+      <data key="d0">split</data>
+      <data key="d1">0</data>
+    </node>
+    <node id="x5">
+      <data key="d0">split</data>
+      <data key="d1">3</data>
+    </node>
+    <node id="c16">
+      <data key="d0">OR</data>
+    </node>
+    <node id="x6">
+      <data key="d0">split</data>
+      <data key="d1">2</data>
+    </node>
+    <node id="x7">
+      <data key="d0">split</data>
+      <data key="d1">0</data>
+    </node>
+    <node id="c18">
+      <data key="d0">MUX</data>
+    </node>
+    <node id="x8">
+      <data key="d0">split</data>
+      <data key="d1">0</data>
+    </node>
+    <node id="x9">
+      <data key="d0">join</data>
+      <data key="d1">0</data>
+    </node>
+    <node id="x10">
+      <data key="d0">split</data>
+      <data key="d1">1</data>
+    </node>
+    <node id="c19">
+      <data key="d0">MUX</data>
+    </node>
+    <node id="x11">
+      <data key="d0">split</data>
+      <data key="d1">1</data>
+    </node>
+    <node id="x12">
+      <data key="d0">join</data>
+      <data key="d1">1</data>
+    </node>
+    <node id="x13">
+      <data key="d0">split</data>
+      <data key="d1">2</data>
+    </node>
+    <node id="c20">
+      <data key="d0">MUX</data>
+    </node>
+    <node id="x14">
+      <data key="d0">split</data>
+      <data key="d1">2</data>
+    </node>
+    <node id="x15">
+      <data key="d0">join</data>
+      <data key="d1">2</data>
+    </node>
+    <node id="x16">
+      <data key="d0">split</data>
+      <data key="d1">0</data>
+    </node>
+    <node id="c24">
+      <data key="d0">DFF</data>
+      <data key="d2">DFF_P</data>
+      <data key="d3">q[0]</data>
+    </node>
+    <node id="x17">
+      <data key="d0">join</data>
+      <data key="d1">0</data>
+    </node>
+    <node id="x18">
+      <data key="d0">split</data>
+      <data key="d1">1</data>
+    </node>
+    <node id="c25">
+      <data key="d0">DFF</data>
+      <data key="d2">DFF_P</data>
+      <data key="d3">q[1]</data>
+    </node>
+    <node id="x19">
+      <data key="d0">join</data>
+      <data key="d1">1</data>
+    </node>
+    <node id="x20">
+      <data key="d0">split</data>
+      <data key="d1">2</data>
+    </node>
+    <node id="c26">
+      <data key="d0">DFF</data>
+      <data key="d2">DFF_P</data>
+      <data key="d3">q[2]</data>
+    </node>
+    <node id="x21">
+      <data key="d0">join</data>
+      <data key="d1">2</data>
+    </node>
+    <node id="x22">
+      <data key="d0">split</data>
+      <data key="d1">3</data>
+    </node>
+    <node id="c27">
+      <data key="d0">DFF</data>
+      <data key="d2">DFF_P</data>
+      <data key="d3">q[3]</data>
+    </node>
+    <node id="x23">
+      <data key="d0">join</data>
+      <data key="d1">3</data>
+    </node>
+    <node id="n1">
+      <data key="d0">wire</data>
+    </node>
+    <node id="c17">
+      <data key="d0">OR</data>
+    </node>
+    <node id="a">
+      <data key="d0">input</data>
+    </node>
+    <node id="any">
+      <data key="d0">output</data>
+    </node>
+    <node id="b">
+      <data key="d0">input</data>
+    </node>
+    <node id="clk">
+      <data key="d0">input</data>
+    </node>
+    <node id="q">
+      <data key="d0">output</data>
+      <data key="d4">True</data>
+    </node>
+    <node id="sel">
+      <data key="d0">input</data>
+    </node>
+    <edge source="x0" target="c14">
+      <data key="d5">A</data>
+    </edge>
+    <edge source="c14" target="x2">
+      <data key="d6">Y</data>
+    </edge>
+    <edge source="x1" target="c14">
+      <data key="d5">B</data>
+    </edge>
+    <edge source="x2" target="n1" />
+    <edge source="x3" target="c15">
+      <data key="d5">A</data>
+    </edge>
+    <edge source="c15" target="c17">
+      <data key="d6">Y</data>
+      <data key="d5">B</data>
+    </edge>
+    <edge source="x4" target="c15">
+      <data key="d5">B</data>
+    </edge>
+    <edge source="x5" target="c16">
+      <data key="d5">A</data>
+    </edge>
+    <edge source="c16" target="c17">
+      <data key="d6">Y</data>
+      <data key="d5">A</data>
+    </edge>
+    <edge source="x6" target="c16">
+      <data key="d5">B</data>
+    </edge>
+    <edge source="x7" target="c18">
+      <data key="d5">A</data>
+    </edge>
+    <edge source="c18" target="x9">
+      <data key="d6">Y</data>
+    </edge>
+    <edge source="x8" target="c18">
+      <data key="d5">B</data>
+    </edge>
+    <edge source="x9" target="n1" />
+    <edge source="x10" target="c19">
+      <data key="d5">A</data>
+    </edge>
+    <edge source="c19" target="x12">
+      <data key="d6">Y</data>
+    </edge>
+    <edge source="x11" target="c19">
+      <data key="d5">B</data>
+    </edge>
+    <edge source="x12" target="n1" />
+    <edge source="x13" target="c20">
+      <data key="d5">A</data>
+    </edge>
+    <edge source="c20" target="x15">
+      <data key="d6">Y</data>
+    </edge>
+    <edge source="x14" target="c20">
+      <data key="d5">B</data>
+    </edge>
+    <edge source="x15" target="n1" />
+    <edge source="x16" target="c24">
+      <data key="d5">D</data>
+    </edge>
+    <edge source="c24" target="x17">
+      <data key="d6">Q</data>
+    </edge>
+    <edge source="x17" target="q" />
+    <edge source="x18" target="c25">
+      <data key="d5">D</data>
+    </edge>
+    <edge source="c25" target="x19">
+      <data key="d6">Q</data>
+    </edge>
+    <edge source="x19" target="q" />
+    <edge source="x20" target="c26">
+      <data key="d5">D</data>
+    </edge>
+    <edge source="c26" target="x21">
+      <data key="d6">Q</data>
+    </edge>
+    <edge source="x21" target="q" />
+    <edge source="x22" target="c27">
+      <data key="d5">D</data>
+    </edge>
+    <edge source="c27" target="x23">
+      <data key="d6">Q</data>
+    </edge>
+    <edge source="x23" target="q" />
+    <edge source="n1" target="x16" />
+    <edge source="n1" target="x18" />
+    <edge source="n1" target="x20" />
+    <edge source="n1" target="x22" />
+    <edge source="c17" target="any">
+      <data key="d6">Y</data>
+    </edge>
+    <edge source="a" target="x11" />
+    <edge source="a" target="x14" />
+    <edge source="a" target="x1" />
+    <edge source="a" target="x3" />
+    <edge source="a" target="x4" />
+    <edge source="a" target="x5" />
+    <edge source="a" target="x6" />
+    <edge source="a" target="x8" />
+    <edge source="b" target="x0" />
+    <edge source="b" target="x10" />
+    <edge source="b" target="x13" />
+    <edge source="b" target="x7" />
+    <edge source="clk" target="c24">
+      <data key="d5">C</data>
+    </edge>
+    <edge source="clk" target="c25">
+      <data key="d5">C</data>
+    </edge>
+    <edge source="clk" target="c26">
+      <data key="d5">C</data>
+    </edge>
+    <edge source="clk" target="c27">
+      <data key="d5">C</data>
+    </edge>
+    <edge source="sel" target="c14">
+      <data key="d5">S</data>
+    </edge>
+    <edge source="sel" target="c18">
+      <data key="d5">S</data>
+    </edge>
+    <edge source="sel" target="c19">
+      <data key="d5">S</data>
+    </edge>
+    <edge source="sel" target="c20">
+      <data key="d5">S</data>
+    </edge>
+  </graph>
+</graphml>

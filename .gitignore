@@ -79,3 +79,9 @@ cmake_install.cmake
 labs/05-CacheSCA/victim.c
 labs/05-CacheSCA/attacker.out
 labs/05-CacheSCA/Makefile
+
+# Lab 7 specifics
+labs/07-SupplyChain/*.dot
+labs/07-SupplyChain/mux_reg.v
+labs/07-SupplyChain/yosys_to_graph.py
+labs/07-SupplyChain/powershell-vuln.json
