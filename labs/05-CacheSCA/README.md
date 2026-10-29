@@ -38,7 +38,7 @@ You will only have to write in the `attacker.c` implementation, specifically onl
 3. **Finding the accessed entry**: decide, from the accumulated timings, which index the victim accessed. Note that this index is not the key itself!
 
 ## Compiling
-As part of the anaconda environment you have a C compiler and CMake installed, you can compile the programs as follows (when in the current directory):
+Activate the course environment first (`conda activate syssec`, see the [main README](../../README.md)); it provides a C compiler and CMake. Then compile the programs from this directory:
 ```
 cmake .
 cmake --build .
@@ -62,7 +62,7 @@ A run of the attacker ends with `[*] Accessed index: <index>`. Before guessing, 
 
 ## Troubleshooting
 - `Could not open shared memory`: the victim is not running.
-- Results differ between runs: increase the eviction buffer size, close other applications, and plug in your charger so the attacker runs on a performance core.
+- Results differ between runs: increase the eviction buffer size, close other applications, and (macOS) plug in your charger so the attacker runs on a performance core.
 
 ## Questions to think about
 - Why does this work even though the victim and attacker are separate processes?

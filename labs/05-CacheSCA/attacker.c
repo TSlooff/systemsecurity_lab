@@ -23,8 +23,9 @@ static inline void force_read(volatile uint8_t *p) {
     asm volatile("" : : "r" (*p) : "memory");
 }
 
-static inline uint8_t* get_probe_address(int i) {
-    return &probe_array[i];
+// returns the address `offset` bytes into the shared table
+static inline uint8_t* get_probe_address(size_t offset) {
+    return &probe_array[offset];
 }
 
 void setup_eviction() {
@@ -72,7 +73,7 @@ void attack() {
         // 0. randomize indices order to evade prefetcher
         for (int i = 0; i < PROBE_SIZE - 1; i++) {
             size_t j = i + rand() / (RAND_MAX / (PROBE_SIZE - i) + 1);
-            int t = indices[j]; indices[j] = indices[i]; indices[i] = t;
+            int tmp = indices[j]; indices[j] = indices[i]; indices[i] = tmp;
         }
 
         // 1. Evict cache & wait for victim process
@@ -85,7 +86,7 @@ void attack() {
             // BEGIN TODO implement probing
             // You will need `get_probe_address` and `get_time` and `force_read` functions.
             
-            // i) take index to probe
+            // i) take the index to probe from the shuffled `indices` array
 
             // ii) get the correct probe address for the given index
             
@@ -101,11 +102,11 @@ void attack() {
     printf("\n");
 
     // BEGIN TODO Find the index most likely accessed by the victim
-    int min_index = -1;
+    int accessed_index = -1;
     
     // END TODO
     
-    printf("[*] Accessed index: %d\n", min_index);
+    printf("[*] Accessed index: %d\n", accessed_index);
 }
 
 int main() {
