@@ -6,9 +6,8 @@
 #include <unistd.h>
 #include <time.h>
 #include <stdint.h>
-#include <pthread.h>
-#include <sys/qos.h>
 #include "common.h"
+#include "platform.h"
 
 // BEGIN TODO set this to an appropriate buffer size for your laptop's cache (number indicates MB of buffer)
 #define EVICTION_BUFFER_SIZE (1) 
@@ -19,19 +18,6 @@
 
 uint8_t *probe_array; 
 void **eviction_buffer;
-
-static inline void memory_barrier() {
-    asm volatile ("dsb ish" : : : "memory");
-    asm volatile ("isb" : : : "memory");
-}
-
-static inline uint64_t get_time() {
-    uint64_t val;
-    memory_barrier();
-    asm volatile("mrs %0, cntvct_el0" : "=r" (val));
-    memory_barrier();
-    return val;
-}
 
 static inline void force_read(volatile uint8_t *p) {
     asm volatile("" : : "r" (*p) : "memory");
@@ -105,7 +91,7 @@ void attack() {
             
             // iii) time memory access
             
-            // iv) cap timing outliers (>200) and add timing to `timing_results` for this index
+            // iv) cap timing outliers (> TIMING_CAP) and add timing to `timing_results` for this index
             
             // END TODO
         }
@@ -114,28 +100,23 @@ void attack() {
     }
     printf("\n");
 
-    // BEGIN TODO Find the index most likely to be the secret
+    // BEGIN TODO Find the index most likely accessed by the victim
     int min_index = -1;
     
     // END TODO
     
-    printf("[*] Secret: %d\n", min_index);
+    printf("[*] Accessed index: %d\n", min_index);
 }
 
 int main() {
-    pthread_t current_thread = pthread_self();
-    int ret = pthread_set_qos_class_self_np(QOS_CLASS_USER_INTERACTIVE, 0);
-
-    if (ret != 0) {
-        fprintf(stderr, "Warning: Could not set QoS class to run on performance core.\n");
-    }
+    use_performance_core();
 
     srand(time(NULL));
 
     int fd = shm_open(SHM_NAME, O_RDONLY, 0666);
     if (fd == -1) {
         fprintf(stderr, "Error: Could not open shared memory '%s'.\n", SHM_NAME);
-        fprintf(stderr, "Make sure ./victim is running first.\n");
+        fprintf(stderr, "Make sure ./victim.out is running first.\n");
         return 1;
     }
 
