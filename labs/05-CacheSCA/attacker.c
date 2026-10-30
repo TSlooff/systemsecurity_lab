@@ -13,7 +13,8 @@
 #define EVICTION_BUFFER_SIZE (1) 
 // END TODO
 
-#define EVICTION_ELEMENTS ((EVICTION_BUFFER_SIZE * 1024 * 1024) / sizeof(void*))
+#define LINE_SIZE 64 // cache line size (128 on Apple Silicon, but touching every 64 bytes covers that too)
+#define EVICTION_LINES ((EVICTION_BUFFER_SIZE * 1024 * 1024) / LINE_SIZE)
 #define TRIALS 100
 
 uint8_t *probe_array; 
@@ -32,25 +33,29 @@ void setup_eviction() {
     printf("[*] Allocating %dMB Eviction Buffer...\n", EVICTION_BUFFER_SIZE);
     eviction_buffer = (void**)malloc(EVICTION_BUFFER_SIZE * 1024 * 1024);
     
-    for (size_t i = 0; i < EVICTION_ELEMENTS - 1; i++) {
-        eviction_buffer[i] = (void*)&eviction_buffer[i+1];
+    // Fisher-Yates shuffle of the order in which the cache lines are visited
+    size_t step = LINE_SIZE / sizeof(void*);
+    size_t *order = malloc(EVICTION_LINES * sizeof(size_t));
+    for (size_t i = 0; i < EVICTION_LINES; i++) {
+        order[i] = i;
     }
-    eviction_buffer[EVICTION_ELEMENTS - 1] = (void*)&eviction_buffer[0];
+    for (size_t i = EVICTION_LINES - 1; i > 0; i--) {
+        size_t j = rand() % (i + 1);
+        size_t tmp = order[i]; order[i] = order[j]; order[j] = tmp;
+    }
 
-    // Fisher-Yates Shuffle with larger stride
-    for (size_t i = 0; i < EVICTION_ELEMENTS - 1; i += 64) {
-        size_t j = i + (rand() % (EVICTION_ELEMENTS - i));
-        void *temp = eviction_buffer[i];
-        eviction_buffer[i] = eviction_buffer[j];
-        eviction_buffer[j] = temp;
+    // link one pointer per cache line into a single random cycle through the whole buffer
+    for (size_t i = 0; i < EVICTION_LINES; i++) {
+        eviction_buffer[order[i] * step] = (void*)&eviction_buffer[order[(i + 1) % EVICTION_LINES] * step];
     }
+    free(order);
 }
 
 // this function makes sure the entire cache is filled with our eviction buffer
 void evict_cache() {
     // pointer chasing
     void **p = eviction_buffer;
-    for (size_t i = 0; i < EVICTION_ELEMENTS; i++) {
+    for (size_t i = 0; i < EVICTION_LINES; i++) {
         p = (void**)*p;
     }
     // avoid compiler optimization
@@ -121,7 +126,17 @@ int main() {
         return 1;
     }
 
-    probe_array = mmap(NULL, MEM_SIZE, PROT_READ, MAP_SHARED, fd, 0);
+    // map the table at a 2 MB-aligned address: otherwise the page-table entry of entry 0 can share
+    // a cache line with a neighbouring mapping (e.g. the eviction buffer), which makes entry 0 look cached
+    size_t align = 2 * 1024 * 1024;
+    uint8_t *reserved = mmap(NULL, MEM_SIZE + 2 * align, PROT_NONE, MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
+    if (reserved == MAP_FAILED) {
+        fprintf(stderr, "Error: mmap failed.\n");
+        return 1;
+    }
+    uint8_t *aligned = (uint8_t *)(((uintptr_t)reserved + align + align - 1) & ~(uintptr_t)(align - 1));
+
+    probe_array = mmap(aligned, MEM_SIZE, PROT_READ, MAP_SHARED | MAP_FIXED, fd, 0);
     if (probe_array == MAP_FAILED) {
         fprintf(stderr, "Error: mmap failed.\n");
         return 1;
